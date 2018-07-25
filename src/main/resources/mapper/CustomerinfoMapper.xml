@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.zzspringboot.mapper.CustomerinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.example.zzspringboot.pojo.Customerinfo" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="c_id" property="cId" jdbcType="INTEGER" />
+    <result column="c_name" property="cName" jdbcType="VARCHAR" />
+    <result column="c_phone" property="cPhone" jdbcType="VARCHAR" />
+    <result column="c_address" property="cAddress" jdbcType="VARCHAR" />
+    <result column="c_note" property="cNote" jdbcType="VARCHAR" />
+  </resultMap>
+</mapper>
