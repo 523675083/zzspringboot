@@ -7,6 +7,8 @@ import com.example.zzspringboot.service.CustomerService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
@@ -22,26 +24,34 @@ public class CustomerServiceImpl implements CustomerService{
     private CustomerinfoMapperCustomer customerinfoMapperCustomer;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public int saveCustomer(Customerinfo customerinfo) {
-       return customerinfoMapper.insert(customerinfo);
+
+        int insert = customerinfoMapper.insert(customerinfo);
+        int i=1/0;
+        return insert;
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public int updateCustomer(Customerinfo customerinfo) {
        return customerinfoMapper.updateByPrimaryKeySelective(customerinfo);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public int deleteCustomer(Integer id) {
        return customerinfoMapper.deleteByPrimaryKey(id);
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
     public Customerinfo queryCustomerById(Integer id) {
         return customerinfoMapper.selectByPrimaryKey(id);
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
     public List<Customerinfo> queryCustomerList(Customerinfo customerinfo) {
         Example example = new Example(Customerinfo.class);
         Example.Criteria criteria=example.createCriteria();
@@ -53,6 +63,7 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
     public List<Customerinfo> queryCustomerListPaged(Customerinfo customerinfo, int page, int pageSize) {
         PageHelper.startPage(page,pageSize);
         Example example = new Example(Customerinfo.class);
@@ -64,6 +75,7 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
     public int queryCustomerListCount(Customerinfo customerinfo) {
         Example example = new Example(Customerinfo.class);
         Example.Criteria criteria=example.createCriteria();
@@ -74,6 +86,7 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
     public Customerinfo getCustomerinfoById(Integer id) {
         return customerinfoMapperCustomer.getCustomerinfoById(id);
     }
